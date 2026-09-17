@@ -1,71 +1,370 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blood Donation Management System</title>
-<link rel="stylesheet" href="style.css">
-  <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#b71c1c">
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>BloodBridge - Home</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <link
+        rel="manifest"
+        href="manifest.json"
+    >
+
+    <meta
+        name="theme-color"
+        content="#b71c1c"
+    >
+
+    <style>
+
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .hero h2 {
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 650px;
+            margin: auto;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            margin-top: 30px;
+        }
+
+        .hero-buttons a {
+            display: inline-block;
+            margin: 8px;
+            padding: 14px 22px;
+            background: #b71c1c;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .hero-buttons a:hover {
+            opacity: 0.85;
+        }
+
+        .features {
+            padding: 35px 20px;
+            text-align: center;
+        }
+
+        .feature-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .feature-card {
+            width: 250px;
+            padding: 25px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .how-it-works {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .steps {
+            max-width: 700px;
+            margin: 25px auto;
+            text-align: left;
+        }
+
+        .step {
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 5px solid #b71c1c;
+            background: #f8f8f8;
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
+
 <header>
-<h1>🩸 Blood Donation Management System</h1>
-<p>Donate Blood, Save Lives</p>
+
+    <h1>🩸 BloodBridge</h1>
+
+    <p>
+        Connecting Blood Donors with People in Need
+    </p>
+
 </header>
 
+
 <nav>
-<a href="index.html">Home</a>
-<a href="register.html">Register</a>
-<a href="request.html">Request</a>
-<a href="camp.html">Camps</a>
-<a href="contact.html">Contact</a>
-<a href="login.html">Login</a>
-<a href="search.html">Search</a>
-<a href="donors.html">Donors</a>
+
+    <a href="index.html">Home</a>
+
+    <a href="register.html">Register</a>
+
+    <a href="request.html">Request</a>
+
+    <a href="matches.html">Matches</a>
+
+    <a href="donors.html">Donors</a>
+
+    <a href="camp.html">Camps</a>
+
+    <a href="contact.html">Contact</a>
+
+    <a href="login.html">Login</a>
+
 </nav>
 
+
+
+<!-- HERO -->
+
 <section class="hero">
-<h2>Donate Blood, Save a Life ❤️</h2>
-<p>Your blood donation can save up to 3 lives.</p>
 
-<a href="register.html">
-<button>Become a Donor</button>
-</a>
+    <h2>
+        🩸 Every Drop Can Make a Difference
+    </h2>
+
+    <p>
+        BloodBridge helps people find registered blood
+        donors and submit blood requests through one
+        simple platform.
+    </p>
+
+
+    <div class="hero-buttons">
+
+        <a href="register.html">
+            ❤️ Become a Donor
+        </a>
+
+        <a href="request.html">
+            🚨 Request Blood
+        </a>
+
+        <a href="matches.html">
+            🔎 Find Donors
+        </a>
+
+    </div>
+
 </section>
 
-<section>
 
-<h2 style="text-align:center;">Why Donate Blood?</h2>
 
-<div class="card">
-<h3>❤️ Save Lives</h3>
-<p>One blood donation can save up to three lives.</p>
-</div>
+<!-- FEATURES -->
 
-<div class="card">
-<h3>🩸 Healthy Donation</h3>
-<p>Blood donation is safe and helps people during emergencies.</p>
-</div>
+<section class="features">
 
-<div class="card">
-<h3>🏥 Emergency Support</h3>
-<p>Hospitals need blood every day for surgeries and accidents.</p>
-</div>
+    <h2>
+        🌟 BloodBridge Features
+    </h2>
+
+
+    <div class="feature-container">
+
+
+        <div class="feature-card">
+
+            <h3>
+                🩸 Donor Registration
+            </h3>
+
+            <p>
+                Donors can register with their blood
+                group, location and availability.
+            </p>
+
+        </div>
+
+
+
+        <div class="feature-card">
+
+            <h3>
+                🔎 Donor Matching
+            </h3>
+
+            <p>
+                Find available donors based on
+                the required blood group.
+            </p>
+
+        </div>
+
+
+
+        <div class="feature-card">
+
+            <h3>
+                🚨 Blood Requests
+            </h3>
+
+            <p>
+                Submit a blood requirement with
+                patient and hospital details.
+            </p>
+
+        </div>
+
+
+
+        <div class="feature-card">
+
+            <h3>
+                📞 Quick Contact
+            </h3>
+
+            <p>
+                Contact an available registered donor
+                directly from the donor list.
+            </p>
+
+        </div>
+
+
+    </div>
 
 </section>
+
+
+
+<!-- HOW IT WORKS -->
+
+<section class="how-it-works">
+
+    <h2>
+        ⚡ How BloodBridge Works
+    </h2>
+
+
+    <div class="steps">
+
+
+        <div class="step">
+
+            <strong>
+                1️⃣ Register
+            </strong>
+
+            <p>
+                A donor registers with their blood
+                group and availability.
+            </p>
+
+        </div>
+
+
+
+        <div class="step">
+
+            <strong>
+                2️⃣ Request
+            </strong>
+
+            <p>
+                A person in need submits a blood
+                request.
+            </p>
+
+        </div>
+
+
+
+        <div class="step">
+
+            <strong>
+                3️⃣ Match
+            </strong>
+
+            <p>
+                BloodBridge searches for available
+                matching donors.
+            </p>
+
+        </div>
+
+
+
+        <div class="step">
+
+            <strong>
+                4️⃣ Connect
+            </strong>
+
+            <p>
+                The requester can contact a matching
+                donor.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
 
 <footer>
-<p>Blood Donation Management System</p>
-<p>Design Thinking Lab Project</p>
-<p>Created by: Your Name</p>
+
+    <p>
+        BloodBridge ❤️ Connecting Donors with Those in Need
+    </p>
+
+    <p>
+        © 2026 BloodBridge
+    </p>
+
 </footer>
+
+
+
 <script>
+
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("service-worker.js");
+
+    navigator.serviceWorker.register(
+        "service-worker.js"
+    );
+
 }
+
 </script>
+
+
 </body>
+
 </html>
