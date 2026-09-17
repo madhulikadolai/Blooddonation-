@@ -25,14 +25,15 @@
 <section>
 
 <h2>User Login</h2>
-
 <form id="loginForm">
 
-<input type="email" id="email" placeholder="Email Address" required>
+  <label>Email</label>
+  <input type="email" id="loginEmail" placeholder="Enter your email" required>
 
-<input type="password" id="password" placeholder="Password" required>
+  <label>Password</label>
+  <input type="password" id="loginPassword" placeholder="Enter your password" required>
 
-<button type="submit">Login</button>
+  <button type="submit">Login</button>
 
 </form>
 
@@ -78,5 +79,29 @@ document.querySelector("form").addEventListener("submit", function(event) {
     }
 });
 </script>
+    <script>
+document.getElementById("loginForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const email = document.getElementById("loginEmail").value;
+    const password = document.getElementById("loginPassword").value;
+
+    const savedUser = JSON.parse(localStorage.getItem("bloodBridgeUser"));
+
+    if (!savedUser) {
+        alert("No account found. Please register first.");
+        return;
+    }
+
+    if (email === savedUser.email && password === savedUser.password) {
+        localStorage.setItem("bloodBridgeLoggedIn", "true");
+
+        alert("Login successful! Welcome to BloodBridge.");
+        window.location.href = "index.html";
+    } else {
+        alert("Incorrect email or password.");
+    }
+});
+                                                      </script>
 </body>
 </html>
