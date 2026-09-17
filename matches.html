@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BloodBridge - Donor Matching</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#b71c1c">
+</head>
+
+<body>
+
+<header>
+    <h1>🩸 BloodBridge</h1>
+    <p>Find Matching Donors</p>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="register.html">Register</a>
+    <a href="request.html">Request</a>
+    <a href="matches.html">Matches</a>
+    <a href="camp.html">Camps</a>
+    <a href="contact.html">Contact</a>
+    <a href="login.html">Login</a>
+    <a href="donors.html">Donors</a>
+</nav>
+
+<section>
+
+    <h2>🔎 Find Matching Donors</h2>
+
+    <p>
+        Select a blood group to find available donors.
+    </p>
+
+    <label for="bloodGroup">
+        Required Blood Group
+    </label>
+
+    <select id="bloodGroup">
+
+        <option value="">
+            Select blood group
+        </option>
+
+        <option value="A+">A+</option>
+        <option value="A-">A-</option>
+
+        <option value="B+">B+</option>
+        <option value="B-">B-</option>
+
+        <option value="AB+">AB+</option>
+        <option value="AB-">AB-</option>
+
+        <option value="O+">O+</option>
+        <option value="O-">O-</option>
+
+    </select>
+
+    <button onclick="findDonors()">
+        🔎 Find Donors
+    </button>
+
+</section>
+
+
+<section id="results">
+
+    <h2>Matching Donors</h2>
+
+    <div id="donorResults">
+        <p>
+            Select a blood group and click "Find Donors".
+        </p>
+    </div>
+
+</section>
+
+
+<footer>
+
+    <p>
+        BloodBridge ❤️ Connecting Donors with Those in Need
+    </p>
+
+</footer>
+
+
+<script>
+
+function findDonors() {
+
+    const bloodGroup =
+        document.getElementById("bloodGroup").value;
+
+    const result =
+        document.getElementById("donorResults");
+
+
+    // Check selection
+
+    if (bloodGroup === "") {
+
+        result.innerHTML =
+            "<p>⚠️ Please select a blood group.</p>";
+
+        return;
+    }
+
+
+    // Get donors
+
+    const donors =
+        JSON.parse(
+            localStorage.getItem(
+                "bloodBridgeDonors"
+            )
+        ) || [];
+
+
+    // Find matching available donors
+
+    const matchingDonors =
+        donors.filter(function(donor) {
+
+            return (
+                donor.bloodGroup === bloodGroup &&
+                donor.availability === "Available"
+            );
+
+        });
+
+
+    // No matching donors
+
+    if (matchingDonors.length === 0) {
+
+        result.innerHTML = `
+
+            <div>
+
+                <h3>😔 No matching donors found</h3>
+
+                <p>
+                    No available ${bloodGroup} donors
+                    are currently registered.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    // Display matching donors
+
+    result.innerHTML = `
+
+        <h3>
+            🩸 ${matchingDonors.length}
+            matching donor(s) found
+        </h3>
+
+    `;
+
+
+    matchingDonors.forEach(function(donor, index) {
+
+        const card =
+            document.createElement("div");
+
+
+        card.style.border =
+            "1px solid #ddd";
+
+        card.style.padding =
+            "15px";
+
+        card.style.margin =
+            "15px 0";
+
+        card.style.borderRadius =
+            "10px";
+
+
+        card.innerHTML = `
+
+            <h3>
+                ${index + 1}. ${donor.name}
+            </h3>
+
+            <p>
+                🩸 <strong>
+                Blood Group:
+                </strong>
+                ${donor.bloodGroup}
+            </p>
+
+            <p>
+                📍 <strong>
+                Location:
+                </strong>
+                ${donor.location || "Not provided"}
+            </p>
+
+            <p>
+                🟢 <strong>
+                Availability:
+                </strong>
+                Available
+            </p>
+
+            <button
+                onclick="contactDonor('${donor.phone}')"
+            >
+                📞 Contact Donor
+            </button>
+
+        `;
+
+
+        result.appendChild(card);
+
+    });
+
+}
+
+
+// Contact donor
+
+function contactDonor(phone) {
+
+    window.location.href =
+        "tel:" + phone;
+
+}
+
+
+// Service worker
+
+if ("serviceWorker" in navigator) {
+
+    navigator.serviceWorker.register(
+        "service-worker.js"
+    );
+
+}
+
+</script>
+
+</body>
+</html>
