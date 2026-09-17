@@ -18,14 +18,6 @@
             text-align: center;
         }
 
-        .donor-section h2 {
-            margin-bottom: 10px;
-        }
-
-        .donor-section p {
-            margin-bottom: 20px;
-        }
-
         .filter-box {
             margin: 20px auto;
             max-width: 350px;
@@ -193,7 +185,6 @@
             </thead>
 
             <tbody id="donorTableBody">
-
             </tbody>
 
         </table>
@@ -201,7 +192,7 @@
     </div>
 
 
-    <!-- Message -->
+    <!-- No Donors -->
 
     <div id="noDonors" class="no-donors" style="display:none;">
 
@@ -236,8 +227,11 @@ const noDonors =
 const bloodFilter =
     document.getElementById("bloodFilter");
 
+const tableContainer =
+    document.querySelector(".table-container");
 
-// Get donors from localStorage
+
+// Get donors
 
 function getDonors() {
 
@@ -259,7 +253,7 @@ function displayDonors(filter = "all") {
     let filteredDonors = donors;
 
 
-    // Apply blood group filter
+    // Filter by blood group
 
     if (filter !== "all") {
 
@@ -274,7 +268,7 @@ function displayDonors(filter = "all") {
 
     if (filteredDonors.length === 0) {
 
-        document.querySelector(".table-container").style.display = "none";
+        tableContainer.style.display = "none";
 
         noDonors.style.display = "block";
 
@@ -283,23 +277,53 @@ function displayDonors(filter = "all") {
     }
 
 
-    document.querySelector(".table-container").style.display = "block";
+    tableContainer.style.display = "block";
 
     noDonors.style.display = "none";
 
 
-    // Create rows
+    // Create donor rows
 
     filteredDonors.forEach((donor, index) => {
 
-        const row = document.createElement("tr");
+        const row =
+            document.createElement("tr");
+
+
+        // Availability style
+
+        let availabilityHTML;
+
+
+        if (donor.availability === "Available") {
+
+            availabilityHTML = `
+                <span class="available">
+                    🟢 Available
+                </span>
+            `;
+
+        } else {
+
+            availabilityHTML = `
+                <span class="not-available">
+                    🔴 Not Available
+                </span>
+            `;
+
+        }
+
 
         row.innerHTML = `
 
-            <td>${index + 1}</td>
+            <td>
+                ${index + 1}
+            </td>
 
             <td>
-                <strong>${donor.name}</strong>
+                <strong>
+                    ${donor.name}
+                </strong>
             </td>
 
             <td class="blood-group">
@@ -314,22 +338,35 @@ function displayDonors(filter = "all") {
                 ${donor.phone}
             </td>
 
-            <td class="available">
-                🟢 Available
+            <td>
+                ${availabilityHTML}
             </td>
 
             <td>
 
-                <button
-                    class="contact-btn"
-                    onclick="contactDonor('${donor.phone}')"
-                >
-                    📞 Contact
-                </button>
+                ${
+                    donor.availability === "Available"
+
+                    ? `
+                        <button
+                            class="contact-btn"
+                            onclick="contactDonor('${donor.phone}')"
+                        >
+                            📞 Contact
+                        </button>
+                    `
+
+                    : `
+                        <span>
+                            —
+                        </span>
+                    `
+                }
 
             </td>
 
         `;
+
 
         tableBody.appendChild(row);
 
@@ -342,12 +379,13 @@ function displayDonors(filter = "all") {
 
 function contactDonor(phone) {
 
-    window.location.href = "tel:" + phone;
+    window.location.href =
+        "tel:" + phone;
 
 }
 
 
-// Filter change
+// Filter
 
 bloodFilter.addEventListener(
     "change",
@@ -359,12 +397,12 @@ bloodFilter.addEventListener(
 );
 
 
-// Load donors when page opens
+// Load donors
 
 displayDonors();
 
 
-// Register service worker
+// Service worker
 
 if ("serviceWorker" in navigator) {
 
