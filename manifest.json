@@ -1,0 +1,10 @@
+{
+  "name": "BloodBridge",
+  "short_name": "BloodBridge",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#b71c1c",
+  "description": "BloodBridge - Connect blood donors with people in need.",
+  "icons": []
+}
