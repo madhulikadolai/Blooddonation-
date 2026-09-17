@@ -1,107 +1,106 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Login</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BloodBridge - Login</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#b71c1c">
 </head>
 
 <body>
 
-<header>
-<h1>🩸 Blood Donation System</h1>
-</header>
+    <header>
+        <h1>🩸 BloodBridge</h1>
 
-<nav>
-<a href="index.html">Home</a>
-<a href="register.html">Register</a>
-<a href="request.html">Request</a>
-<a href="camp.html">Camps</a>
-<a href="contact.html">Contact</a>
-<a href="login.html">Login</a>
-<a href="search.html">Search</a>
-<a href="donors.html">Donors</a>
-</nav>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="register.html">Register</a>
+            <a href="request.html">Request Blood</a>
+            <a href="donors.html">Donors</a>
+            <a href="camp.html">Camps</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
 
-<section>
+    <main>
+        <section class="form-container">
 
-<h2>User Login</h2>
-<form id="loginForm">
+            <h2>Login</h2>
+            <p>Login to your BloodBridge account</p>
 
-  <label>Email</label>
-  <input type="email" id="loginEmail" placeholder="Enter your email" required>
+            <form id="loginForm">
 
-  <label>Password</label>
-  <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                <label for="loginEmail">Email</label>
+                <input
+                    type="email"
+                    id="loginEmail"
+                    placeholder="Enter your email"
+                    required
+                >
 
-  <button type="submit">Login</button>
+                <label for="loginPassword">Password</label>
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Enter your password"
+                    required
+                >
 
-</form>
+                <button type="submit">Login</button>
 
-<h3 id="loginMessage"></h3>
+            </form>
 
-</section>
+            <p>
+                Don't have an account?
+                <a href="register.html">Register here</a>
+            </p>
 
-<footer>
-<p>Welcome to Blood Donation System ❤️</p>
-</footer>
+        </section>
+    </main>
 
-<script>
-document.getElementById("loginForm").addEventListener("submit", function(e){
+    <footer>
+        <p>© 2026 BloodBridge | Connecting Donors with Those in Need</p>
+    </footer>
 
-e.preventDefault();
-
-document.getElementById("loginMessage").innerHTML =
-"✅ Login Successful!";
-
-this.reset();
-
-});
-</script>
-<script>
-document.querySelector("form").addEventListener("submit", function(event) {
-    event.preventDefault();
-
-    const email = document.querySelector('input[type="email"]').value;
-    const password = document.querySelector('input[type="password"]').value;
-
-    const savedUser = JSON.parse(localStorage.getItem("bloodBridgeUser"));
-
-    if (!savedUser) {
-        alert("No account found. Please register first.");
-        return;
-    }
-
-    if (email === savedUser.email && password === savedUser.password) {
-        alert("Login successful! Welcome to BloodBridge.");
-        window.location.href = "index.html";
-    } else {
-        alert("Incorrect email or password.");
-    }
-});
-</script>
     <script>
-document.getElementById("loginForm").addEventListener("submit", function(event) {
-    event.preventDefault();
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
 
-    const email = document.getElementById("loginEmail").value;
-    const password = document.getElementById("loginPassword").value;
+            const email = document.getElementById("loginEmail").value.trim();
+            const password = document.getElementById("loginPassword").value;
 
-    const savedUser = JSON.parse(localStorage.getItem("bloodBridgeUser"));
+            const savedUserText = localStorage.getItem("bloodBridgeUser");
 
-    if (!savedUser) {
-        alert("No account found. Please register first.");
-        return;
-    }
+            if (!savedUserText) {
+                alert("Please register first.");
+                return;
+            }
 
-    if (email === savedUser.email && password === savedUser.password) {
-        localStorage.setItem("bloodBridgeLoggedIn", "true");
+            const savedUser = JSON.parse(savedUserText);
 
-        alert("Login successful! Welcome to BloodBridge.");
-        window.location.href = "index.html";
-    } else {
-        alert("Incorrect email or password.");
-    }
-});
-                                                      </script>
+            if (
+                email === savedUser.email &&
+                password === savedUser.password
+            ) {
+                localStorage.setItem("bloodBridgeLoggedIn", "true");
+
+                alert("Login successful! Welcome to BloodBridge.");
+
+                window.location.href = "index.html";
+            } else {
+                alert("Incorrect email or password.");
+            }
+        });
+
+        // Register service worker
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("service-worker.js");
+        }
+    </script>
+
 </body>
 </html>
