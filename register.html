@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Donor Registration</title>
+    <title>BloodBridge - Donor Registration</title>
 
     <link rel="stylesheet" href="style.css">
 
@@ -16,7 +16,8 @@
 <body>
 
 <header>
-    <h1>🩸 Blood Donor Registration</h1>
+    <h1>🩸 BloodBridge</h1>
+    <p>Blood Donor Registration</p>
 </header>
 
 <nav>
@@ -30,13 +31,21 @@
     <a href="donors.html">Donors</a>
 </nav>
 
+
 <section>
 
-    <h2>Register as a Donor</h2>
+    <h2>🩸 Register as a Donor</h2>
+
+    <p>
+        Become a blood donor and help connect with people who need blood.
+    </p>
+
 
     <form id="registerForm">
 
+        <!-- Full Name -->
         <label for="name">Full Name</label>
+
         <input
             type="text"
             id="name"
@@ -44,7 +53,10 @@
             required
         >
 
+
+        <!-- Email -->
         <label for="email">Email</label>
+
         <input
             type="email"
             id="email"
@@ -52,7 +64,10 @@
             required
         >
 
+
+        <!-- Phone -->
         <label for="phone">Phone Number</label>
+
         <input
             type="tel"
             id="phone"
@@ -60,20 +75,65 @@
             required
         >
 
+
+        <!-- Blood Group -->
         <label for="bloodGroup">Blood Group</label>
+
         <select id="bloodGroup" required>
-            <option value="">Select blood group</option>
+
+            <option value="">
+                Select blood group
+            </option>
+
             <option value="A+">A+</option>
             <option value="A-">A-</option>
+
             <option value="B+">B+</option>
             <option value="B-">B-</option>
+
             <option value="AB+">AB+</option>
             <option value="AB-">AB-</option>
+
             <option value="O+">O+</option>
             <option value="O-">O-</option>
+
         </select>
 
+
+        <!-- Location -->
+        <label for="location">Location</label>
+
+        <input
+            type="text"
+            id="location"
+            placeholder="Enter your city / area"
+            required
+        >
+
+
+        <!-- Availability -->
+        <label for="availability">Availability</label>
+
+        <select id="availability" required>
+
+            <option value="">
+                Select availability
+            </option>
+
+            <option value="Available">
+                Available
+            </option>
+
+            <option value="Not Available">
+                Not Available
+            </option>
+
+        </select>
+
+
+        <!-- Password -->
         <label for="password">Password</label>
+
         <input
             type="password"
             id="password"
@@ -81,7 +141,12 @@
             required
         >
 
-        <label for="confirmPassword">Confirm Password</label>
+
+        <!-- Confirm Password -->
+        <label for="confirmPassword">
+            Confirm Password
+        </label>
+
         <input
             type="password"
             id="confirmPassword"
@@ -89,73 +154,206 @@
             required
         >
 
-        <button type="submit">Register</button>
+
+        <!-- Register Button -->
+        <button type="submit">
+            Register
+        </button>
 
     </form>
+
 
     <h3 id="message"></h3>
 
 </section>
 
+
 <footer>
-    <p>Thank you for becoming a lifesaver ❤️</p>
+
+    <p>
+        BloodBridge ❤️ Connecting Donors with Those in Need
+    </p>
+
 </footer>
 
 
+
 <script>
-document.getElementById("registerForm").addEventListener("submit", function(event) {
 
-    event.preventDefault();
+document
+    .getElementById("registerForm")
+    .addEventListener("submit", function(event) {
 
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const bloodGroup = document.getElementById("bloodGroup").value;
-    const password = document.getElementById("password").value;
-    const confirmPassword = document.getElementById("confirmPassword").value;
-
-    // Check passwords
-    if (password !== confirmPassword) {
-        alert("Passwords do not match!");
-        return;
-    }
-
-    // Create user
-    const user = {
-        name: name,
-        email: email,
-        phone: phone,
-        bloodGroup: bloodGroup,
-        password: password
-    };
-
-    // Save user
-    localStorage.setItem("bloodBridgeUser", JSON.stringify(user));
-// Save donor to donor list
-let donors = JSON.parse(localStorage.getItem("bloodBridgeDonors")) || [];
-
-donors.push({
-    name: name,
-    email: email,
-    phone: phone,
-    bloodGroup: bloodGroup
-});
-
-localStorage.setItem("bloodBridgeDonors", JSON.stringify(donors));
-    // Save login status
-    localStorage.setItem("bloodBridgeLoggedIn", "false");
-
-    alert("Registration successful! Please login.");
-
-    window.location.href = "login.html";
-});
+        event.preventDefault();
 
 
+        // Get form values
+
+        const name =
+            document.getElementById("name").value.trim();
+
+        const email =
+            document.getElementById("email").value.trim();
+
+        const phone =
+            document.getElementById("phone").value.trim();
+
+        const bloodGroup =
+            document.getElementById("bloodGroup").value;
+
+        const location =
+            document.getElementById("location").value.trim();
+
+        const availability =
+            document.getElementById("availability").value;
+
+        const password =
+            document.getElementById("password").value;
+
+        const confirmPassword =
+            document.getElementById("confirmPassword").value;
+
+
+
+        // Check password
+
+        if (password !== confirmPassword) {
+
+            alert("Passwords do not match!");
+
+            return;
+        }
+
+
+
+        // Create user
+
+        const user = {
+
+            name: name,
+
+            email: email,
+
+            phone: phone,
+
+            bloodGroup: bloodGroup,
+
+            location: location,
+
+            availability: availability,
+
+            password: password
+
+        };
+
+
+
+        // Save user information
+
+        localStorage.setItem(
+            "bloodBridgeUser",
+            JSON.stringify(user)
+        );
+
+
+
+        // Save login status
+
+        localStorage.setItem(
+            "bloodBridgeLoggedIn",
+            "false"
+        );
+
+
+
+        // Get existing donors
+
+        let donors =
+            JSON.parse(
+                localStorage.getItem("bloodBridgeDonors")
+            ) || [];
+
+
+
+        // Check whether email already exists
+
+        const existingDonor =
+            donors.find(
+                donor => donor.email === email
+            );
+
+
+
+        if (existingDonor) {
+
+            alert(
+                "This email is already registered as a donor."
+            );
+
+            return;
+        }
+
+
+
+        // Add new donor
+
+        donors.push({
+
+            name: name,
+
+            email: email,
+
+            phone: phone,
+
+            bloodGroup: bloodGroup,
+
+            location: location,
+
+            availability: availability
+
+        });
+
+
+
+        // Save donor list
+
+        localStorage.setItem(
+            "bloodBridgeDonors",
+            JSON.stringify(donors)
+        );
+
+
+
+        // Success message
+
+        alert(
+            "Registration successful! Please login."
+        );
+
+
+
+        // Go to login page
+
+        window.location.href =
+            "login.html";
+
+    });
+
+
+
+    
 // Register service worker
+
 if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("service-worker.js");
+
+    navigator.serviceWorker.register(
+        "service-worker.js"
+    );
+
 }
+
 </script>
+
 
 </body>
 </html>
