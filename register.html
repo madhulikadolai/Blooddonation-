@@ -131,7 +131,17 @@ document.getElementById("registerForm").addEventListener("submit", function(even
 
     // Save user
     localStorage.setItem("bloodBridgeUser", JSON.stringify(user));
+// Save donor to donor list
+let donors = JSON.parse(localStorage.getItem("bloodBridgeDonors")) || [];
 
+donors.push({
+    name: name,
+    email: email,
+    phone: phone,
+    bloodGroup: bloodGroup
+});
+
+localStorage.setItem("bloodBridgeDonors", JSON.stringify(donors));
     // Save login status
     localStorage.setItem("bloodBridgeLoggedIn", "false");
 
