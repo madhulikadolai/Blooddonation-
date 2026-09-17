@@ -24,13 +24,12 @@
     <a href="index.html">Home</a>
     <a href="register.html">Register</a>
     <a href="request.html">Request</a>
+    <a href="matches.html">Matches</a>
     <a href="camp.html">Camps</a>
     <a href="contact.html">Contact</a>
     <a href="login.html">Login</a>
-    <a href="search.html">Search</a>
     <a href="donors.html">Donors</a>
 </nav>
-
 
 <section>
 
@@ -40,10 +39,7 @@
         Enter the details of the person who needs blood.
     </p>
 
-
     <form id="requestForm">
-
-        <!-- Patient Name -->
 
         <label for="patientName">
             Patient Name
@@ -55,9 +51,6 @@
             placeholder="Enter patient name"
             required
         >
-
-
-        <!-- Blood Group -->
 
         <label for="bloodGroup">
             Required Blood Group
@@ -71,20 +64,14 @@
 
             <option value="A+">A+</option>
             <option value="A-">A-</option>
-
             <option value="B+">B+</option>
             <option value="B-">B-</option>
-
             <option value="AB+">AB+</option>
             <option value="AB-">AB-</option>
-
             <option value="O+">O+</option>
             <option value="O-">O-</option>
 
         </select>
-
-
-        <!-- Location -->
 
         <label for="location">
             Location
@@ -97,9 +84,6 @@
             required
         >
 
-
-        <!-- Hospital -->
-
         <label for="hospital">
             Hospital / Medical Center
         </label>
@@ -110,9 +94,6 @@
             placeholder="Enter hospital name"
             required
         >
-
-
-        <!-- Units -->
 
         <label for="units">
             Required Units
@@ -127,9 +108,6 @@
             required
         >
 
-
-        <!-- Contact -->
-
         <label for="contact">
             Contact Number
         </label>
@@ -140,9 +118,6 @@
             placeholder="Enter contact number"
             required
         >
-
-
-        <!-- Urgency -->
 
         <label for="urgency">
             Urgency
@@ -168,17 +143,22 @@
 
         </select>
 
-
-        <!-- Submit -->
-
         <button type="submit">
             🩸 Submit Blood Request
         </button>
 
     </form>
 
+    <div id="message"></div>
 
-    <h3 id="message"></h3>
+</section>
+
+
+<section id="matchSection" style="display:none;">
+
+    <h2>🔎 Matching Donors</h2>
+
+    <div id="matchingDonors"></div>
 
 </section>
 
@@ -201,8 +181,6 @@ document
         event.preventDefault();
 
 
-        // Get values
-
         const patientName =
             document.getElementById("patientName")
             .value.trim();
@@ -211,113 +189,4 @@ document
             document.getElementById("bloodGroup")
             .value;
 
-        const location =
-            document.getElementById("location")
-            .value.trim();
-
-        const hospital =
-            document.getElementById("hospital")
-            .value.trim();
-
-        const units =
-            document.getElementById("units")
-            .value;
-
-        const contact =
-            document.getElementById("contact")
-            .value.trim();
-
-        const urgency =
-            document.getElementById("urgency")
-            .value;
-
-
-        // Create request
-
-        const request = {
-
-            id: Date.now(),
-
-            patientName: patientName,
-
-            bloodGroup: bloodGroup,
-
-            location: location,
-
-            hospital: hospital,
-
-            units: units,
-
-            contact: contact,
-
-            urgency: urgency,
-
-            status: "Active",
-
-            date: new Date().toLocaleString()
-
-        };
-
-
-        // Get existing requests
-
-        let requests =
-            JSON.parse(
-                localStorage.getItem(
-                    "bloodBridgeRequests"
-                )
-            ) || [];
-
-
-        // Add new request
-
-        requests.push(request);
-
-
-        // Save requests
-
-        localStorage.setItem(
-            "bloodBridgeRequests",
-            JSON.stringify(requests)
-        );
-
-
-        // Success message
-
-        alert(
-            "Blood request submitted successfully!"
-        );
-
-
-        // Clear form
-
-        document
-            .getElementById("requestForm")
-            .reset();
-
-
-        // Show message
-
-        document
-            .getElementById("message")
-            .innerText =
-            "✅ Your blood request has been submitted.";
-
-
-    });
-
-
-// Service worker
-
-if ("serviceWorker" in navigator) {
-
-    navigator.serviceWorker.register(
-        "service-worker.js"
-    );
-
-}
-
-</script>
-
-</body>
-</html>
+        const
